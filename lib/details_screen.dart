@@ -1,4 +1,5 @@
 //import 'package:bookmark/route_generator.dart';
+import 'package:bookmark/constans.dart';
 import 'package:flutter/material.dart';
 //import 'package:bookmark/main.dart';
 import 'package:bookmark/entites/blog.dart';
@@ -13,17 +14,17 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(data.title.substring(0, 30)),
+        title: Text(data.title),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(8.0),
         child: Column(
           children: [
-            ListTile(
-              title: Text(data.title),
-              trailing: Image.network(data.imageUrl),
-              subtitle: Text(data.content),
-            )
+            Image.network(data.imageUrl),
+            SizedBox(height: 10),
+            Text(data.title, style: titleStyle),
+            SizedBox(height: 10),
+            Text(data.content),
           ],
         ),
       ),
