@@ -1,14 +1,14 @@
 //import 'package:bookmark/route_generator.dart';
-import 'package:bookmark/constans.dart';
+import 'package:bookmark/UI/constans.dart';
 import 'package:flutter/material.dart';
 //import 'package:bookmark/main.dart';
-import 'package:bookmark/entites/blog.dart';
+import 'package:bookmark/data/blog.dart';
 
-class DetailsPage extends StatelessWidget {
+class DetailsScreen extends StatelessWidget {
   final BookMark data;
 
   // In the constructor, require a Todo.
-  DetailsPage({Key key, @required this.data}) : super(key: key);
+  DetailsScreen({Key key, @required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
