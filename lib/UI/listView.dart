@@ -12,18 +12,18 @@ class ListBuilder extends StatefulWidget {
 }
 
 class _ListBuilderState extends State<ListBuilder> {
-  _onTap(int index) {
-    setState(() {
-      Navigator.of(context)
-          .pushNamed('/details', arguments: widget.receivedArticles[index]);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return _buildTileTiltle(widget.receivedArticles, index, _onTap(index));
+        _onTap() {
+          setState(() {
+            Navigator.of(context).pushNamed('/details',
+                arguments: widget.receivedArticles[index]);
+          });
+        }
+
+        return _buildTileTiltle(widget.receivedArticles, index, _onTap);
       },
       itemCount: widget.receivedArticles.length,
     );
@@ -35,30 +35,43 @@ _buildTileTiltle(List<BookMark> articles, int index, Function _onTap) {
   String text = articles[index].text;
   String imageUrl = articles[index].imageUrl;
   return Card(
-    color: Colors.white,
-    elevation: 20.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    child: ListTile(
-      contentPadding: EdgeInsets.fromLTRB(8, 2, 8, 8),
-      title: Text(
-        title,
-        style: titleStyle,
-      ),
-      subtitle: Text(
-        text,
-        style: descriptionStyle,
-      ),
-      trailing: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: Image.network(
-          imageUrl,
-          height: 150.0,
-          width: 100.0,
+    elevation: 10,
+    child: InkWell(
+      onTap: _onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 250,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 5,
+                    style: titleStyle,
+                    //softWrap: true,
+                  ),
+                  Text(
+                    text,
+                    overflow: TextOverflow.clip,
+                    maxLines: 5,
+                    style: descriptionStyle,
+                    //softWrap: true,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(flex: 1, child: Image.network(imageUrl)),
+          ],
         ),
       ),
-      onTap: _onTap,
     ),
   );
 }

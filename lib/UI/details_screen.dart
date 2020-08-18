@@ -14,7 +14,8 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(data.title),
+        centerTitle: true,
+        title: Text('BBC News'),
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
