@@ -39,36 +39,44 @@ _buildTileTiltle(List<BookMark> articles, int index, Function _onTap) {
     child: InkWell(
       onTap: _onTap,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
+          //mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               width: 250,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 5,
-                    style: titleStyle,
-                    //softWrap: true,
-                  ),
-                  Text(
-                    text,
-                    overflow: TextOverflow.clip,
-                    maxLines: 5,
-                    style: descriptionStyle,
-                    //softWrap: true,
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.only(right: 2),
+                child: Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 5,
+                      style: titleStyle,
+                      //softWrap: true,
+                    ),
+                    Text(
+                      text,
+                      overflow: TextOverflow.clip,
+                      maxLines: 5,
+                      style: descriptionStyle,
+                      //softWrap: true,
+                    ),
+                  ],
+                ),
               ),
             ),
-            Expanded(flex: 1, child: Image.network(imageUrl)),
+            Expanded(
+                flex: 1,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.network(imageUrl))),
           ],
         ),
       ),
