@@ -51,26 +51,31 @@ _buildTileTiltle(List<BookMark> articles, int index, Function _onTap) {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      title,
-                      style: titleStyle,
-                    ),
-                    Text(
-                      text,
-                      style: descriptionStyle,
-                    ),
+                    _buildTextWidgets(title, titleStyle),
+                    _buildTextWidgets(text, descriptionStyle),
                   ],
                 ),
               ),
             ),
-            Expanded(
-                flex: 1,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image.network(imageUrl))),
+            _buildImage(imageUrl)
           ],
         ),
       ),
     ),
   );
+}
+
+_buildTextWidgets(String text, TextStyle style) {
+  return Text(
+    text,
+    style: style,
+  );
+}
+
+_buildImage(String imageUrl) {
+  return Expanded(
+      flex: 1,
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Image.network(imageUrl)));
 }

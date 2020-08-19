@@ -13,9 +13,7 @@ class BookmarkManager extends ChangeNotifier {
 
   BookmarkManager() {
     CallApi.fetchArticles(jsonUrl).then((value) {
-      print('fetch f');
       _bookmarkList.addAll(value);
-      print('list added');
       isFetched = true;
       notifyListeners();
     });

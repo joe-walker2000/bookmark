@@ -1,18 +1,9 @@
 import 'package:bookmark/UI/listView.dart';
-import 'package:bookmark/data/blog.dart';
 import 'package:bookmark/data/bookmarkList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  // final List<BookMark> receivedArticles;
-
-  // HomeScreen(this.receivedArticles);
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -26,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: Consumer<BookmarkManager>(
               builder: (context, bookmarkList, child) {
-            //bookmarkList.addAll();
             return ListBuilder(bookmarkList.list);
           })),
     );
