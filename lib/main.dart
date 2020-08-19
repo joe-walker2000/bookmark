@@ -2,6 +2,8 @@ import 'package:bookmark/UI/loading_screen.dart';
 import 'package:bookmark/data/blog.dart';
 import 'package:flutter/material.dart';
 import 'package:bookmark/data/route_generator.dart';
+import 'package:provider/provider.dart';
+import 'package:bookmark/data/bookmarkList.dart';
 import 'UI/home_screen.dart';
 import 'data/api_call.dart';
 
@@ -21,24 +23,34 @@ class _AppState extends State<App> {
   @override
   void initState() {
     CallApi.fetchArticles(jsonUrl).then((value) {
-      setState(() {
-        _articles.addAll(value);
-        isLoaded = true;
-      });
+      print('fetch f');
+      _articles.addAll(value);
+      print('list added');
+      isLoaded = true;
+      final providerList = Provider.of<BookmarkManager>(context);
+      providerList.setter(_articles);
+      // setState(() {
+      //   _articles.addAll(value);
+      //   isLoaded = true;
+      // });
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Bookmark',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Provider<BookmarkManager>(
+      create: (context) => BookmarkManager(),
+      child: MaterialApp(
+        title: 'Bookmark',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: isLoaded ? HomeScreen() : LoadingPage(),
+        // home: isLoaded ? HomeScreen() : LoadingPage(),
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
-      home: isLoaded ? HomeScreen(_articles) : LoadingPage(),
-      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }

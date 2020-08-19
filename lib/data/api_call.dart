@@ -16,7 +16,9 @@ class CallApi {
             articles['content'] == null) {
           continue;
         } else {
+          print('succss');
           _articles.add(BookMark.fromJson(articles));
+          print('hahha');
         }
       }
     }

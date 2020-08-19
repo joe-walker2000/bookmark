@@ -7,11 +7,11 @@ class RouteGenerator {
     final args = settings.arguments;
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomeScreen(args));
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case '/details':
         return MaterialPageRoute(builder: (_) => DetailsScreen(data: args));
       default:
-        return MaterialPageRoute(builder: (_) => HomeScreen(args));
+        return MaterialPageRoute(builder: (_) => HomeScreen());
     }
   }
 }
