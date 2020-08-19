@@ -1,5 +1,7 @@
 import 'package:bookmark/data/blog.dart';
+import 'package:bookmark/data/bookmarkList.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'constans.dart';
 
@@ -17,10 +19,9 @@ class _ListBuilderState extends State<ListBuilder> {
     return ListView.builder(
       itemBuilder: (context, index) {
         _onTap() {
-          setState(() {
-            Navigator.of(context).pushNamed('/details',
-                arguments: widget.receivedArticles[index]);
-          });
+          Navigator.of(context).pushNamed('/details',
+              arguments: Provider.of<BookmarkManager>(context, listen: false)
+                  .list[index]);
         }
 
         return _buildTileTiltle(widget.receivedArticles, index, _onTap);
@@ -42,31 +43,21 @@ _buildTileTiltle(List<BookMark> articles, int index, Function _onTap) {
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //crossAxisAlignment: CrossAxisAlignment.stretch,
-          //mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               width: 250,
               child: Padding(
                 padding: const EdgeInsets.only(right: 2),
                 child: Column(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
-
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       title,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 5,
                       style: titleStyle,
-                      //softWrap: true,
                     ),
                     Text(
                       text,
-                      overflow: TextOverflow.clip,
-                      maxLines: 5,
                       style: descriptionStyle,
-                      //softWrap: true,
                     ),
                   ],
                 ),

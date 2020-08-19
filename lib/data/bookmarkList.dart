@@ -8,14 +8,18 @@ import 'api_call.dart';
 class BookmarkManager extends ChangeNotifier {
   List<BookMark> _bookmarkList = [];
   bool isFetched = false;
-  UnmodifiableListView<BookMark> get items =>
-      UnmodifiableListView(_bookmarkList);
-  // String jsonUrl =
-  //     'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=e1e0a9d049a0457dbc87e50f71794a43';
+  String jsonUrl =
+      'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=e1e0a9d049a0457dbc87e50f71794a43';
+
+  BookmarkManager() {
+    CallApi.fetchArticles(jsonUrl).then((value) {
+      print('fetch f');
+      _bookmarkList.addAll(value);
+      print('list added');
+      isFetched = true;
+      notifyListeners();
+    });
+  }
 
   List<BookMark> get list => _bookmarkList;
-  void setter(List<BookMark> value) {
-    _bookmarkList = value;
-    notifyListeners();
-  }
 }
