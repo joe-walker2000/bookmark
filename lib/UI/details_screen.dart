@@ -1,8 +1,8 @@
 //import 'package:bookmark/route_generator.dart';
-import 'package:bookmark/UI/constans.dart';
+import 'package:bookmark/UI/styles.dart';
 import 'package:flutter/material.dart';
 //import 'package:bookmark/main.dart';
-import 'package:bookmark/data/blog.dart';
+import 'package:bookmark/data/bookmark.dart';
 
 class DetailsScreen extends StatelessWidget {
   final BookMark data;

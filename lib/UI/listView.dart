@@ -1,37 +1,32 @@
-import 'package:bookmark/data/blog.dart';
-import 'package:bookmark/data/bookmarkList.dart';
+import 'package:bookmark/data/bookmark.dart';
+import 'package:bookmark/data/bookmark_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'constans.dart';
+import 'styles.dart';
 
-class ListBuilder extends StatefulWidget {
+class ListBuilder extends StatelessWidget {
   final List<BookMark> receivedArticles;
 
   ListBuilder(this.receivedArticles);
   @override
-  _ListBuilderState createState() => _ListBuilderState();
-}
-
-class _ListBuilderState extends State<ListBuilder> {
-  @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        _onTap() {
-          Navigator.of(context).pushNamed('/details',
-              arguments: Provider.of<BookmarkManager>(context, listen: false)
-                  .list[index]);
-        }
-
-        return _buildTileTiltle(widget.receivedArticles, index, _onTap);
+        return _buildCard(receivedArticles, index, context);
       },
-      itemCount: widget.receivedArticles.length,
+      itemCount: receivedArticles.length,
     );
   }
 }
 
-_buildTileTiltle(List<BookMark> articles, int index, Function _onTap) {
+_buildCard(List<BookMark> articles, int index, BuildContext context) {
+  _onTap() {
+    Navigator.of(context).pushNamed('/details',
+        arguments:
+            Provider.of<BookmarkManager>(context, listen: false).list[index]);
+  }
+
   String title = articles[index].title;
   String text = articles[index].text;
   String imageUrl = articles[index].imageUrl;
