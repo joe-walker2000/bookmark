@@ -3,29 +3,22 @@ import 'package:flutter/material.dart';
 
 import 'constans.dart';
 
-class ListBuilder extends StatefulWidget {
-  final List<BookMark> receivedArticles;
-
+class ListBuilder extends StatelessWidget {
+  final List<dynamic> receivedArticles;
   ListBuilder(this.receivedArticles);
-  @override
-  _ListBuilderState createState() => _ListBuilderState();
-}
 
-class _ListBuilderState extends State<ListBuilder> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
         _onTap() {
-          setState(() {
-            Navigator.of(context).pushNamed('/details',
-                arguments: widget.receivedArticles[index]);
-          });
+          Navigator.of(context)
+              .pushNamed('/details', arguments: receivedArticles[index]);
         }
 
-        return _buildTileTiltle(widget.receivedArticles, index, _onTap);
+        return _buildTileTiltle(receivedArticles, index, _onTap);
       },
-      itemCount: widget.receivedArticles.length,
+      itemCount: receivedArticles.length,
     );
   }
 }
