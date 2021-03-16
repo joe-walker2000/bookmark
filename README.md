@@ -1,6 +1,6 @@
 # bookmark
 
-A new Flutter project.
+News mobile app
 
 ## Getting Started
 
